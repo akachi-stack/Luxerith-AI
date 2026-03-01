@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmanuel | AI Developer</title>
+<link rel="shortcut icon" href="image/logo.png" type="image/x-icon">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+/* ===============================
+   ROOT VARIABLES
+================================= */
+
+:root {
+    --bg-dark: #0f172a;
+    --bg-light: #f5f7fa;
+    --text-dark: #ffffff;
+    --text-light: #0f172a;
+    --blue: #3b82f6;
+    --chocolate: #7b3f00;
+    --glass: rgba(255, 255, 255, 0.08);
+}
+
+/* ===============================
+   GLOBAL STYLES
+================================= */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-dark);
+    transition: 0.4s ease;
+}
+
+body.light-mode {
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+/* ===============================
+   NAVBAR
+================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(15px);
+    background: var(--glass);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 1000;
+}
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo img {
+    height: 40px;
+}
+
+/* NAV LINKS */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(90deg, var(--blue), var(--chocolate));
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* BOOK BUTTON */
+
+.book-btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, var(--blue), var(--chocolate));
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.book-btn:hover {
+    transform: scale(1.05);
+}
+
+/* THEME TOGGLE */
+
+.toggle {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+/* MOBILE MENU */
+
+.hamburger {
+    display: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media(max-width: 900px) {
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: rgba(15, 23, 42, 0.95);
+        width: 250px;
+        padding: 30px;
+        border-radius: 15px;
+        transition: 0.4s;
+    }
+
+    body.light-mode .nav-links {
+        background: white;
+    }
+
+    .nav-links.active {
+        right: 20px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <!-- LOGO -->
+    <a href="#" class="logo" download="emmanuel-logo.png">
+        <img src="image/logo.png" alt="Emmanuel Logo">
+        Emmanuel
+    </a>
+
+    <!-- HAMBURGER -->
+    <div class="hamburger" id="hamburger">
+        ☰
+    </div>
+
+    <!-- NAV LINKS -->
+    <div class="nav-links" id="navLinks">
+        <a href="#about">About Me</a>
+        <a href="#lab">The Lab</a>
+        <a href="#contact">Contact</a>
+        <button class="book-btn"><a href="https://wa.link/bqwdyl">Book a Call</a></button>
+        <span class="toggle" id="themeToggle">🌙</span>
+    </div>
+
+</nav>
+
+<script>
+
+/* ===============================
+   MOBILE MENU TOGGLE
+================================= */
+
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
+
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
+
+
+/* ===============================
+   DARK / LIGHT MODE
+================================= */
+
+const themeToggle = document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "light"){
+    document.body.classList.add("light-mode");
+    themeToggle.textContent = "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if(document.body.classList.contains("light-mode")){
+        themeToggle.textContent = "☀️";
+        localStorage.setItem("theme", "light");
+    } else {
+        themeToggle.textContent = "🌙";
+        localStorage.setItem("theme", "dark");
+    }
+});
+
+</script>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            I Build <span class="gradient-text">AI-Powered</span><br>
+            Web Applications
+        </h1>
+
+        <p id="typing-text"></p>
+
+        <div class="hero-buttons">
+            <a href="https://wa.link/bqwdyl" target="_blank" class="btn-primary">Work With Me</a>
+            <a href="#lab" class="btn-glass">Explore The Lab</a>
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+        <img src="image/wordcamp (1).png" alt="Emmanuel at WordCamp">
+    </div>
+
+</section>
+
+<!-- AI Revenue Impact Calculator Section with Live AI Glow Particles -->
+<section class="ai-calc-section">
+  <div class="ai-calc-container">
+    <!-- Left: Inputs -->
+    <div class="ai-calc-left">
+      <h2 class="ai-calc-title">AI Revenue Impact Calculator</h2>
+      
+      <label for="ai-revenue">Monthly Revenue (₦)</label>
+      <input type="number" id="ai-revenue" class="ai-input" placeholder="e.g., 500000">
+
+      <label for="ai-staff">Staff Size</label>
+      <input type="number" id="ai-staff" class="ai-input" placeholder="e.g., 10">
+
+      <label for="ai-customers">Customer Volume / Month</label>
+      <input type="number" id="ai-customers" class="ai-input" placeholder="e.g., 200">
+
+      <button class="ai-calc-btn" id="ai-calc-btn">Calculate</button>
+    </div>
+
+    <!-- Right: Result & actions -->
+    <div class="ai-calc-right">
+        <h2>See How AI Can Transform Your Business and Increase Revenue</h2><br><br>
+      <div class="ai-result" id="ai-result">Estimated Annual Growth with AI: ₦0</div>
+      <button class="ai-whatsapp-btn" id="ai-whatsapp-btn">Share on WhatsApp</button>
+      <button class="ai-pdf-btn" id="ai-pdf-btn">Download PDF Report</button>
+    </div>
+
+    <!-- Glow line for AI processing -->
+    <div class="ai-glow-line"></div>
+  </div>
+</section>
+
+<style>
+.ai-calc-section {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+}
+
+.ai-calc-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  padding: 40px;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-calc-left, .ai-calc-right { flex: 1; min-width: 280px; }
+
+.ai-calc-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  background: linear-gradient(270deg, #f7b733, #fc4a1a, #6a11cb);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s ease infinite;
+}
+
+@keyframes gradientAnim { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+.ai-input { width: 100%; padding: 12px 15px; margin-bottom: 20px; border-radius: 12px; border: none; outline: none; font-size: 1rem; background: rgba(255,255,255,0.1); color: #fff; box-shadow: inset 0 0 8px rgba(255,255,255,0.2); transition: all 0.3s ease; }
+.ai-input::placeholder { color: rgba(255,255,255,0.7); }
+.ai-input:focus { box-shadow: 0 0 15px rgba(247,183,51,0.7), inset 0 0 10px rgba(255,255,255,0.2); background: rgba(255,255,255,0.15); }
+
+.ai-calc-btn, .ai-whatsapp-btn, .ai-pdf-btn { padding: 15px 25px; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-bottom: 15px; transition: all 0.3s ease; width: 100%; }
+.ai-calc-btn { background: linear-gradient(45deg, #f7b733, #fc4a1a); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.ai-calc-btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+.ai-whatsapp-btn { background: #25D366; color: #fff; }
+.ai-pdf-btn { background: linear-gradient(45deg, #1e3c72, #2a5298); color: #fff; }
+
+.ai-result { margin-bottom: 15px; font-size: 1.2rem; padding: 20px; border-radius: 15px; background: rgba(0,0,0,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
+.ai-result::after { content: ''; position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); animation: glow 2.5s ease-in-out infinite alternate; }
+
+@keyframes glow { 0% { transform: scale(0.8); opacity: 0.4;} 100% { transform: scale(1.2); opacity: 0.1;} }
+
+.ai-glow-line { position: absolute; top: 50%; left: calc(33%); width: 34%; height: 4px; background: linear-gradient(90deg, rgba(247,183,51,0), rgba(247,183,51,0.8), rgba(247,183,51,0)); border-radius: 2px; pointer-events: none; }
+
+.particle {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(247,183,51,0.8);
+  pointer-events: none;
+  animation: particleMove 1s linear forwards;
+}
+@keyframes particleMove { 0% { transform: translateX(0); opacity:1; } 100% { transform: translateX(100%); opacity:0; } }
+
+@media (max-width: 768px) { .ai-calc-container { flex-direction: column; gap: 20px; } .ai-glow-line { display: none; } }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  const calcBtn = document.getElementById('ai-calc-btn');
+  const resultDiv = document.getElementById('ai-result');
+  const whatsappBtn = document.getElementById('ai-whatsapp-btn');
+  const pdfBtn = document.getElementById('ai-pdf-btn');
+  const container = document.querySelector('.ai-calc-container');
+
+  function createParticle(input) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    const rect = input.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    particle.style.top = (rect.top + rect.height/2 - containerRect.top -5) + 'px';
+    particle.style.left = (rect.left + rect.width - containerRect.left -5) + 'px';
+    container.appendChild(particle);
+    setTimeout(()=>particle.remove(), 1000);
+  }
+
+  calcBtn.addEventListener('click', () => {
+    const revenue = parseFloat(document.getElementById('ai-revenue').value) || 0;
+    const staff = parseFloat(document.getElementById('ai-staff').value) || 0;
+    const customers = parseFloat(document.getElementById('ai-customers').value) || 0;
+
+    const costSavings = staff * 20000;
+    const efficiencyGain = customers * 50;
+    const revenueLift = revenue * 0.3;
+    const annualGrowth = (costSavings + efficiencyGain + revenueLift) * 12;
+
+    resultDiv.textContent = `Estimated Annual Growth with AI: ₦${annualGrowth.toLocaleString()}`;
+
+    // Animate particles from each input
+    [document.getElementById('ai-revenue'), document.getElementById('ai-staff'), document.getElementById('ai-customers')].forEach(input=>{
+      createParticle(input);
+    });
+
+    // Pulse the result
+    resultDiv.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+    resultDiv.style.transform = 'scale(1.05)';
+    resultDiv.style.boxShadow = '0 0 30px rgba(247,183,51,0.9)';
+    setTimeout(()=>{
+      resultDiv.style.transform = '';
+      resultDiv.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
+    }, 300);
+  });
+
+  whatsappBtn.addEventListener('click', () => {
+    const text = encodeURIComponent(resultDiv.textContent);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+  });
+
+  pdfBtn.addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const revenue = parseFloat(document.getElementById('ai-revenue').value) || 0;
+    const staff = parseFloat(document.getElementById('ai-staff').value) || 0;
+    const customers = parseFloat(document.getElementById('ai-customers').value) || 0;
+    const costSavings = staff * 20000;
+    const efficiencyGain = customers * 50;
+    const revenueLift = revenue * 0.3;
+    const annualGrowth = (costSavings + efficiencyGain + revenueLift) * 12;
+
+    doc.setFontSize(22); doc.setTextColor(255,183,51); doc.text("Luxerith Technologies", 20, 20);
+    doc.setFontSize(16); doc.setTextColor(30,60,114); doc.text("AI Revenue Impact Summary", 20, 40);
+    doc.setFontSize(12); doc.setTextColor(0,0,0);
+    doc.text(`Monthly Revenue: ₦${revenue.toLocaleString()}`,20,55);
+    doc.text(`Staff Size: ${staff}`,20,65);
+    doc.text(`Customer Volume / Month: ${customers}`,20,75);
+    doc.text(`Estimated Cost Savings: ₦${costSavings.toLocaleString()}`,20,85);
+    doc.text(`Efficiency Gain: ₦${efficiencyGain.toLocaleString()}`,20,95);
+    doc.text(`Revenue Lift: ₦${revenueLift.toLocaleString()}`,20,105);
+    doc.setFontSize(14); doc.setTextColor(247,183,51);
+    doc.text(`Estimated Annual Growth with AI: ₦${annualGrowth.toLocaleString()}`,20,125);
+    doc.setFontSize(12); doc.setTextColor(60,30,40);
+    const marketingMsg = "Unlock your business's full potential with AI. Luxerith Technologies helps you reduce costs, boost efficiency, and scale revenue. Transform insights into profits today!";
+    doc.text(doc.splitTextToSize(marketingMsg, 170),20,145);
+    doc.save("Luxerith_AI_Revenue_Impact_Report.pdf");
+  });
+})();
+</script>
+
+<section class="stats-section">
+
+    <div class="stat-card">
+        <h2 class="counter" data-target="25">0</h2>
+        <p>Projects Built</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 class="counter" data-target="18">0</h2>
+        <p>Clients Served</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 id="githubRepos">0</h2>
+        <p>Public GitHub Repositories</p>
+    </div>
+
+</section>
+
+<!-- About Section -->
+<section class="about-section" id="about">
+  <div class="about-container">
+    <div class="about-left">
+      <h2 class="about-title">John Emmanuel Emebom</h2>
+      <h3 class="about-subtitle">Founder & AI Developer at Luxerith Technologies</h3>
+      <p class="about-description">
+        At <strong>Luxerith Technologies</strong>, I transform businesses with cutting-edge AI solutions.  
+        From predictive analytics and automation to intelligent revenue optimization tools, my mission is to help companies unlock their full potential.  
+        With a passion for innovation and a proven track record, I combine deep technical expertise with strategic insights to deliver measurable results.  
+        Partner with me to harness AI, reduce costs, boost efficiency, and scale your business to the next level.
+      </p>
+      <a href="https://wa.link/bqwdyl" class="about-btn">Work With Me</a>
+    </div>
+    <div class="about-right">
+      <div class="about-image">
+        <img src="image/IMG-20260301-WA0015 (1).jpg" alt="AI Developer Image" style="width:100%; height:100%; border-radius:20px; object-fit:cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.about-section {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.about-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  background: linear-gradient(270deg, #f7b733, #fc4a1a, #6a11cb);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s ease infinite;
+  margin-bottom: 10px;
+}
+
+.about-subtitle {
+  font-size: 1.3rem;
+  color: #f7b733;
+  margin-bottom: 20px;
+}
+
+.about-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 30px;
+}
+
+.about-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #f7b733, #6a11cb);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(247,183,51,0.7);
+}
+
+.about-right {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f7b733, #6a11cb);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Gradient animation for titles */
+@keyframes gradientAnim {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+
+@media(max-width:768px){
+  .about-container{flex-direction:column; text-align:center;}
+  .about-right{margin-top:30px;}
+}
+</style>
+
+<section class="services-section" id="services">
+
+    <div class="section-header">
+        <h2>AI Solutions That Drive Revenue & Automation</h2>
+        <p>
+            From intelligent web platforms to AI automation systems, I design
+            scalable digital solutions that help businesses grow and operate smarter.
+        </p>
+    </div>
+
+    <div class="services-grid">
+
+        <!-- SERVICE 1 -->
+        <div class="service-card">
+            <div class="icon">🤖</div>
+            <h3>AI-Powered Web Applications</h3>
+            <p>
+                Custom AI-driven dashboards, SaaS platforms, and smart systems
+                built to optimize business performance.
+            </p>
+
+            <div class="more-content">
+                <ul>
+                    <li>Custom Admin Dashboards</li>
+                    <li>Payment API Integrations</li>
+                    <li>Scalable Backend Logic</li>
+                    <li>Highly Secured Systems</li>
+                </ul>
+            </div>
+
+            <button class="learn-more">Learn More</button>
+        </div>
+
+        <!-- SERVICE 3 -->
+        <div class="service-card">
+            <div class="icon">⚙️</div>
+            <h3>AI Automation Systems</h3>
+            <p>
+                Intelligent automation systems that reduce manual workload
+                and increase operational efficiency.
+            </p>
+
+            <div class="more-content">
+                <ul>
+                    <li>Chatbots & Virtual Assistants</li>
+                    <li>Workflow Automation</li>
+                    <li>CRM Integration</li>
+                    <li>Data Analytics Systems</li>
+                </ul>
+            </div>
+
+            <button class="learn-more">Learn More</button>
+        </div>
+
+        <!-- SERVICE 4 -->
+        <div class="service-card">
+            <div class="icon">🎯</div>
+            <h3>Brand & Digital Strategy</h3>
+            <p>
+                Strategic positioning and digital branding to help businesses
+                dominate their market online.
+            </p>
+
+            <div class="more-content">
+                <ul>
+                    <li>Brand Identity Development</li>
+                    <li>Market Positioning</li>
+                    <li>Conversion Strategy</li>
+                    <li>Growth Consulting</li>
+                </ul>
+            </div>
+
+            <button class="learn-more">Learn More</button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Courses & Training Section -->
+<section class="courses-section" id="courses">
+  <h2 class="courses-title">Unlock Your Potential with Luxerith Trainings</h2>
+  <div class="courses-container">
+
+    <!-- AI Training Card -->
+    <div class="course-card">
+      <h3 class="course-title">Artificial Intelligence</h3>
+      <p class="course-desc">
+        Master AI from the ground up! Learn predictive modeling, neural networks, and real-world AI applications. By the end, you'll be able to build AI solutions that drive measurable results and elevate businesses.
+      </p>
+      <a href="https://wa.link/bqwdyl" class="course-btn">Enroll Now</a>
+    </div>
+
+    <!-- Web Development Card -->
+    <div class="course-card">
+      <h3 class="course-title">Web Development</h3>
+      <p class="course-desc">
+        Build modern, high-performance websites and web apps using HTML, CSS, JavaScript, React, Python(Flask) and MySQL. Gain skills to launch your own projects or work with global clients with confidence and speed.
+      </p>
+      <a href="https://wa.link/bqwdyl" class="course-btn">Enroll Now</a>
+    </div>
+
+    <!-- Prompt Engineering Card -->
+    <div class="course-card">
+      <h3 class="course-title">Prompt Engineering</h3>
+      <p class="course-desc">
+        Unlock the true power of AI tools like ChatGPT. Learn to craft high-precision prompts for AI content, automation, and problem solving. Perfect for developers, marketers, and innovators aiming for maximum impact.
+      </p>
+      <a href="https://wa.link/bqwdyl" class="course-btn">Enroll Now</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.courses-section {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  text-align: center;
+}
+
+.courses-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  background: linear-gradient(270deg, #f7b733, #fc4a1a, #6a11cb);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s ease infinite;
+}
+
+.courses-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual course card */
+.course-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  padding: 30px 20px;
+  flex: 1 1 300px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 50px rgba(247,183,51,0.7);
+}
+
+.course-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  background: linear-gradient(270deg, #f7b733, #fc4a1a, #6a11cb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s ease infinite;
+}
+
+.course-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 25px;
+}
+
+.course-btn {
+  padding: 12px 25px;
+  background: linear-gradient(45deg, #f7b733, #6a11cb);
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(247,183,51,0.7);
+}
+
+/* Gradient animation */
+@keyframes gradientAnim {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+
+@media(max-width:900px){
+  .courses-container{flex-direction: column; align-items: center;}
+}
+</style>
+
+<section class="case-section" id="case-studies">
+
+    <div class="section-header">
+        <h2>Real Results. Real Impact.</h2>
+        <p>
+            A selection of AI-powered systems and digital solutions
+            built to drive measurable business growth.
+        </p>
+    </div>
+
+    <div class="case-grid">
+
+        <!-- CASE 1 -->
+        <div class="case-card">
+            <img src="case1.jpg" alt="AI Automation Project">
+
+            <div class="case-content">
+                <h3>AI Automation for Logistics Company</h3>
+                <p>Reduced manual dispatch processes using AI workflow automation.</p>
+
+                <button class="view-case"
+                    data-title="AI Automation for Logistics Company"
+                    data-problem="The company manually processed delivery scheduling leading to delays and errors."
+                    data-solution="Built a custom AI workflow system that automated scheduling and optimized routes."
+                    data-tech="HTML, CSS, JS, Python API Integration"
+                    data-result="Reduced operational time by 60% and increased efficiency by 40%.">
+                    View Case Study
+                </button>
+            </div>
+        </div>
+
+        <!-- CASE 2 -->
+        <div class="case-card">
+            <img src="case2.jpg" alt="AI SaaS Platform">
+
+            <div class="case-content">
+                <h3>AI-Powered SaaS Dashboard</h3>
+                <p>Custom intelligent analytics platform for business insights.</p>
+
+                <button class="view-case"
+                    data-title="AI-Powered SaaS Dashboard"
+                    data-problem="Business lacked centralized data analytics."
+                    data-solution="Designed scalable dashboard integrating AI data analysis modules."
+                    data-tech="JavaScript, REST API, Cloud Database"
+                    data-result="Improved data visibility by 75% and reduced reporting time.">
+                    View Case Study
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MODAL -->
+<div class="case-modal" id="caseModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modalTitle"></h2>
+
+        <h4>Problem</h4>
+        <p id="modalProblem"></p>
+
+        <h4>Solution</h4>
+        <p id="modalSolution"></p>
+
+        <h4>Technology Used</h4>
+        <p id="modalTech"></p>
+
+        <h4>Result</h4>
+        <p id="modalResult"></p>
+    </div>
+</div>
+
+<!-- Optimized AI Skills Map Section -->
+<section class="ai-skills-section">
+  <h2 class="skills-title">My AI Expertise</h2>
+  <div class="skills-map" id="skills-map">
+    <!-- Only relevant skills included -->
+    <div class="skill-node" data-skill="Python"></div>
+    <div class="skill-node" data-skill="TensorFlow"></div>
+    <div class="skill-node" data-skill="PyTorch"></div>
+    <div class="skill-node" data-skill="NLP"></div>
+    <div class="skill-node" data-skill="Computer Vision"></div>
+    <div class="skill-node" data-skill="Flask"></div>
+    <div class="skill-node" data-skill="Docker"></div>
+    <div class="skill-node" data-skill="AWS"></div>
+    <div class="skill-node" data-skill="SQL"></div>
+    <div class="skill-node" data-skill="Pandas"></div>
+    <canvas id="skills-canvas"></canvas>
+  </div>
+</section>
+
+<style>
+.ai-skills-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.skills-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  background: linear-gradient(270deg, #f7b733, #fc4a1a, #6a11cb);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s ease infinite;
+}
+
+@keyframes gradientAnim {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+
+.skills-map {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.skill-node {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #f7b733, #6a11cb);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: default;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Glow Animation */
+.skill-node:hover {
+  transform: scale(1.15);
+  box-shadow: 0 10px 35px rgba(247,183,51,0.8);
+}
+
+/* Skill Label Always Visible */
+.skill-node span {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #f7b733;
+  pointer-events: none; /* Prevent blocking animations */
+  white-space: nowrap;
+}
+
+#skills-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; /* Do not interfere with other scripts */
+}
+</style>
+
+<script>
+(function(){
+  const container = document.getElementById('skills-map');
+  const nodes = container.querySelectorAll('.skill-node');
+  const canvas = container.querySelector('#skills-canvas');
+  const ctx = canvas.getContext('2d');
+
+  // Add span labels once
+  nodes.forEach(node=>{
+    const label = document.createElement('span');
+    label.textContent = node.getAttribute('data-skill');
+    node.appendChild(label);
+  });
+
+  function resizeCanvas(){
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  // Random node positions
+  nodes.forEach(node=>{
+    const mapRect = container.getBoundingClientRect();
+    node.style.left = Math.random() * (mapRect.width - 100) + 'px';
+    node.style.top = Math.random() * (mapRect.height - 100) + 'px';
+  });
+
+  // Draw connecting lines between close nodes
+  function drawLines(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    nodes.forEach((n1,i)=>{
+      const r1 = n1.getBoundingClientRect();
+      const x1 = r1.left + r1.width/2 - container.getBoundingClientRect().left;
+      const y1 = r1.top + r1.height/2 - container.getBoundingClientRect().top;
+
+      nodes.forEach((n2,j)=>{
+        if(i<j){
+          const r2 = n2.getBoundingClientRect();
+          const x2 = r2.left + r2.width/2 - container.getBoundingClientRect().left;
+          const y2 = r2.top + r2.height/2 - container.getBoundingClientRect().top;
+          const dist = Math.hypot(x2-x1, y2-y1);
+          if(dist < 250){
+            ctx.strokeStyle = 'rgba(247,183,51,'+(1-dist/250)+')';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x1,y1);
+            ctx.lineTo(x2,y2);
+            ctx.stroke();
+          }
+        }
+      });
+    });
+    requestAnimationFrame(drawLines);
+  }
+  drawLines();
+
+  // Gentle floating motion
+  function floatNodes(){
+    nodes.forEach(node=>{
+      const x = parseFloat(node.style.left);
+      const y = parseFloat(node.style.top);
+      const dx = Math.sin(Date.now()/1000 + x)*0.3;
+      const dy = Math.cos(Date.now()/1000 + y)*0.3;
+      node.style.transform = `translate(${dx}px,${dy}px)`;
+    });
+    requestAnimationFrame(floatNodes);
+  }
+  floatNodes();
+
+})();
+</script>
+
+<section class="ai-lab" id="lab">
+
+    <h2 class="section-title">AI Innovation Lab</h2>
+
+    <canvas id="neuralBg"></canvas>
+
+    <div class="lab-container">
+
+        <!-- BRAND ANALYZER -->
+        <div class="lab-card">
+
+            <h3>Brand Intelligence Analyzer</h3>
+
+            <input type="text" id="brandInput" placeholder="Enter Brand Name">
+
+            <button onclick="analyzeBrand()">Analyze Brand</button>
+
+            <div class="results">
+                <div class="score-circle">
+                    <span id="brandScore">0%</span>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <span>Memorability</span>
+                        <div class="bar"><div id="memBar"></div></div>
+                    </div>
+
+                    <div class="metric">
+                        <span>SEO Strength</span>
+                        <div class="bar"><div id="seoBar"></div></div>
+                    </div>
+
+                    <div class="metric">
+                        <span>Market Impact</span>
+                        <div class="bar"><div id="impactBar"></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- LIVE AI DASHBOARD -->
+        <div class="lab-card dashboard">
+
+            <h3>Live AI System Monitor</h3>
+
+            <canvas id="aiChart"></canvas>
+
+            <div class="system-status">
+                <div>Neural Load: <span id="load"></span></div>
+                <div>Prediction Accuracy: <span id="accuracy"></span></div>
+                <div>Active Nodes: <span id="nodes"></span></div>
+            </div>
+
+        </div>
+<div class="lab-card">
+    <h3>Model Confidence Visualizer</h3>
+
+    <canvas id="confidenceChart"></canvas>
+
+    <button onclick="generateConfidence()">Simulate Prediction</button>
+</div>
+
+    </div>
+
+</section>
+
+<section class="testimonials" id="testimonials">
+
+    <h2 class="section-title">What Clients Say</h2>
+
+    <div class="testimonial-slider">
+
+        <div class="testimonial-card">
+            <div class="client-info">
+                <img src="avatar1.jpg" alt="Client">
+                <div>
+                    <h4>Logistics Manager</h4>
+                    <span>Port Harcourt</span>
+                </div>
+            </div>
+            <p>Reduced manual workload by 60% using AI automation systems.</p>
+            <div class="stars">★★★★★</div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="client-info">
+                <img src="avatar2.jpg" alt="Client">
+                <div>
+                    <h4>Startup Founder</h4>
+                    <span>Tech Industry</span>
+                </div>
+            </div>
+            <p>Analytics dashboard performance improved 3x after optimization.</p>
+            <div class="stars">★★★★★</div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="client-info">
+                <img src="avatar3.jpg" alt="Client">
+                <div>
+                    <h4>Real Estate Director</h4>
+                    <span>Lagos</span>
+                </div>
+            </div>
+            <p>Predictive pricing model increased company revenue significantly.</p>
+            <div class="stars">★★★★★</div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="client-info">
+                <img src="avatar4.jpg" alt="Client">
+                <div>
+                    <h4>E-commerce Owner</h4>
+                    <span>Retail</span>
+                </div>
+            </div>
+            <p>Chatbot automation handles 80% of customer requests.</p>
+            <div class="stars">★★★★★</div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="client-info">
+                <img src="avatar5.jpg" alt="Client">
+                <div>
+                    <h4>Fintech CEO</h4>
+                    <span>Financial Services</span>
+                </div>
+            </div>
+            <p>Delivered secure, intelligent and scalable AI systems.</p>
+            <div class="stars">★★★★★</div>
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+const slider = document.querySelector('.testimonial-slider');
+
+let autoScroll = setInterval(() => {
+    slider.scrollBy({
+        left: slider.offsetWidth,
+        behavior: 'smooth'
+    });
+}, 5000);
+</script>
+
+<!-- Footer Section with AI Particle Animation -->
+<footer class="footer-section">
+  <canvas id="footer-particles"></canvas>
+  <div class="footer-container">
+
+    <!-- Branding -->
+    <div class="footer-brand">
+      <h2 class="footer-title">Luxerith Technologies</h2>
+      <p class="footer-subtitle">Crafting Intelligent Solutions | John Emmanuel Emebom</p>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#skills-map">Skills</a>
+      <a href="#courses">Courses</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <!-- Social & Contact -->
+    <div class="footer-social">
+      <a href="mailto:contact@luxerith.com" title="Email"><img src="image/mail_18221866.png" alt="Email" width="50%"></a>
+      <a href="https://linkedin.com/in/john-eme" target="_blank" title="LinkedIn"><img src="image/linkedin_4096153.png" alt=" icon" width="50%"></a>
+      <a href="https://github.com/john-eme" target="_blank" title="GitHub"><img src="image/github_3291695.png" alt="github icon" width="50%"></a>
+      <a href="https://twitter.com/john_eme" target="_blank" title="Twitter"><img src="image/social-media_14417460.png" alt="twitter icon" width="50%"></a>
+    </div>
+
+    <!-- CTA -->
+    <div class="footer-cta">
+      <a href="https://wa.link/bqwdyl" class="cta-btn">Work With Me</a>
+    </div>
+
+    <p class="footer-copy">© 2026 Luxerith Technologies. All rights reserved.</p>
+
+  </div>
+</footer>
+
+<style>
+.footer-section {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  padding: 60px 20px 40px 20px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Canvas for AI particle animation */
+#footer-particles {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative; /* above canvas */
+  z-index: 1;
+}
+
+.footer-brand {
+  flex: 1 1 250px;
+}
+
+.footer-title {
+  font-size: 1.8rem;
+  background: linear-gradient(270deg, #f7b733, #fc4a1a, #6a11cb);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s ease infinite;
+  margin-bottom: 10px;
+}
+
+.footer-subtitle {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-links {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: rgba(247,183,51,0.9);
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover { color: #fff; }
+
+.footer-social {
+  flex: 1 1 150px;
+  display: flex;
+  gap: 15px;
+  font-size: 1.4rem;
+}
+
+.footer-social a {
+  color: rgba(247,183,51,0.9);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-social a:hover {
+  transform: scale(1.2);
+  color: #fff;
+}
+
+.footer-cta {
+  flex-basis: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.cta-btn {
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #f7b733, #6a11cb);
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(247,183,51,0.7);
+}
+
+.footer-copy {
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+}
+
+@keyframes gradientAnim {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+
+@media(max-width:768px){
+  .footer-container{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-links, .footer-social { flex-direction: row; justify-content: center; gap: 20px; margin-top: 15px;}
+}
+</style>
+
+<script>
+// Footer AI Particle Animation
+(function(){
+  const canvas = document.getElementById('footer-particles');
+  const ctx = canvas.getContext('2d');
+  let particlesArray = [];
+
+  function resizeCanvas(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class Particle {
+    constructor(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.speedY = (Math.random() - 0.5) * 0.5;
+      this.color = 'rgba(247,183,51,' + Math.random()*0.7 + ')';
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw(){
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function initParticles(){
+    particlesArray = [];
+    let number = Math.floor((canvas.width*canvas.height)/10000); // density
+    for(let i=0;i<number;i++){
+      particlesArray.push(new Particle());
+    }
+  }
+  initParticles();
+
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p=>{
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+
+
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<div class="whatsapp-float" onclick="openWhatsAppModal()">
+    <i class="fab fa-whatsapp"></i>
+</div>
+
+<!-- WHATSAPP MODAL -->
+<div class="whatsapp-modal" id="whatsappModal">
+
+    <div class="modal-content">
+
+        <span class="close-btn" onclick="closeWhatsAppModal()">×</span>
+
+        <h3>Let’s Build Something Intelligent 🚀</h3>
+
+        <p>
+            Chat with me directly on WhatsApp to discuss your AI project,
+            automation needs, or digital transformation goals.
+        </p>
+
+        <a href="https://wa.link/bqwdyl"
+           target="_blank"
+           class="whatsapp-cta">
+           Let’s Chat on WhatsApp
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+function openWhatsAppModal() {
+    document.getElementById("whatsappModal").style.display = "flex";
+}
+
+function closeWhatsAppModal() {
+    document.getElementById("whatsappModal").style.display = "none";
+}
+
+/* Close when clicking outside */
+window.onclick = function(e) {
+    const modal = document.getElementById("whatsappModal");
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
