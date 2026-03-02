@@ -375,3 +375,56 @@ setInterval(() => {
 }, 5000);
 
 updateDots();
+
+
+
+function calculateROI() {
+
+    const revenue = parseFloat(document.getElementById("revenue").value);
+    const adBudget = parseFloat(document.getElementById("adBudget").value);
+    const conversionRate = parseFloat(document.getElementById("conversionRate").value);
+    const websiteType = document.getElementById("websiteType").value;
+
+    if (isNaN(revenue) || isNaN(adBudget) || isNaN(conversionRate)) {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+
+    // Website performance multiplier
+    let performanceBoost;
+
+    if (websiteType === "static") {
+        performanceBoost = 1.35; // 35% growth
+    } 
+    else if (websiteType === "dynamic") {
+        performanceBoost = 1.65; // 65% growth
+    } 
+    else {
+        performanceBoost = 2.0; // 100% growth (AI)
+    }
+
+    // Improved conversion rate
+    const improvedConversion = conversionRate * performanceBoost;
+
+    // Revenue improvement factor
+    const projectedRevenue = revenue * performanceBoost;
+
+    // Annual Growth
+    const annualCurrent = revenue * 12;
+    const annualProjected = projectedRevenue * 12;
+    const annualGrowth = annualProjected - annualCurrent;
+
+    // ROI Calculation
+    const annualAdSpend = adBudget * 12;
+    const roi = ((annualProjected - annualAdSpend) / annualAdSpend) * 100;
+
+    // Output results
+    document.getElementById("projectedRevenue").innerText =
+        "₦" + projectedRevenue.toLocaleString(undefined, {maximumFractionDigits:0});
+
+    document.getElementById("annualGrowth").innerText =
+        "₦" + annualGrowth.toLocaleString(undefined, {maximumFractionDigits:0});
+
+    document.getElementById("roiPercent").innerText =
+        roi.toFixed(0) + "%";
+}
